@@ -10,6 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id={SECTION_ID.hero}
+      aria-label="학교폭력 긴급 상담"
       className="relative flex min-h-screen flex-col items-center justify-center bg-navy px-6 py-20 text-center"
     >
       {/* 배경 그라데이션 */}

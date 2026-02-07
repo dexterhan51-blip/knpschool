@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { SECTION_ID } from "@/lib/constants";
-import { AUTHORITY } from "@/lib/content";
+import { AUTHORITY, MEDIA } from "@/lib/content";
 
 export default function AuthoritySection() {
   return (
     <section
       id={SECTION_ID.authority}
       className="bg-warm-gray-50 px-6 py-20 md:py-28"
+      aria-label="담당 변호사 소개"
     >
       <div className="mx-auto max-w-3xl">
         {/* 섹션 라벨 */}
@@ -14,7 +15,7 @@ export default function AuthoritySection() {
           {AUTHORITY.sectionLabel}
         </p>
 
-        <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
+        <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12" itemScope itemType="https://schema.org/Person">
           {/* 프로필 이미지 */}
           <div className="shrink-0">
             <div className="h-56 w-56 overflow-hidden rounded-2xl bg-warm-gray-200 shadow-xl">
@@ -24,6 +25,7 @@ export default function AuthoritySection() {
                 width={224}
                 height={224}
                 className="h-full w-full object-cover object-top"
+                itemProp="image"
                 priority
               />
             </div>
@@ -31,10 +33,10 @@ export default function AuthoritySection() {
 
           {/* 프로필 정보 */}
           <div className="flex-1 text-center md:text-left">
-            <h3 className="text-2xl font-bold text-navy md:text-3xl">
+            <h3 className="text-2xl font-bold text-navy md:text-3xl" itemProp="name">
               {AUTHORITY.name}
             </h3>
-            <p className="mt-1 text-base text-navy/60">
+            <p className="mt-1 text-base text-navy/60" itemProp="jobTitle">
               {AUTHORITY.title}
             </p>
 
@@ -81,6 +83,24 @@ export default function AuthoritySection() {
             {AUTHORITY.philosophy}
           </p>
         </blockquote>
+
+        {/* 미디어 출연 로고 스트립 */}
+        <div className="mt-12">
+          <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-navy/40">
+            {MEDIA.sectionLabel}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 opacity-50 grayscale">
+            {MEDIA.outlets.map((outlet) => (
+              <span
+                key={outlet.name}
+                className="text-sm font-bold text-navy/60 md:text-base"
+                aria-label={`${outlet.name} 출연`}
+              >
+                {outlet.name}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

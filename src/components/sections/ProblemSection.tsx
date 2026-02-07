@@ -10,6 +10,7 @@ export default function ProblemSection() {
   return (
     <section
       id={SECTION_ID.problem}
+      aria-label="학교폭력 상황 체크리스트"
       className="bg-navy-light px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-3xl">

@@ -5,6 +5,7 @@ export default function CaseStudySection() {
   return (
     <section
       id={SECTION_ID.caseStudy}
+      aria-label="실제 해결 사례"
       className="bg-navy-light px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-4xl">

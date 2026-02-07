@@ -9,6 +9,7 @@ export default function ClosingCTASection() {
   return (
     <section
       id={SECTION_ID.closingCta}
+      aria-label="무료 상담 신청"
       className="bg-navy px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-2xl text-center">

@@ -83,6 +83,7 @@ export default function TestimonialSection() {
   return (
     <section
       id={NEW_SECTION_ID.testimonials}
+      aria-label="의뢰인 후기"
       className="bg-navy-light px-6 py-20 md:py-28"
     >
       <div ref={ref} className="mx-auto max-w-4xl">

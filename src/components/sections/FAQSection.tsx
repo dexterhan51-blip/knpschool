@@ -60,30 +60,12 @@ function FAQItem({
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
   return (
     <section
       id={NEW_SECTION_ID.faq}
       className="bg-navy-light px-6 py-20 md:py-28"
+      aria-label="자주 묻는 질문"
     >
-      {/* FAQ Schema for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="mx-auto max-w-3xl">
         <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-orange">
           {FAQ.sectionLabel}

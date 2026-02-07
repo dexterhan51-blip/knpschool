@@ -78,6 +78,7 @@ export default function YouTubeSection() {
   return (
     <section
       id={SECTION_ID.youtube}
+      aria-label="학교폭력 대응 영상"
       className="bg-navy px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-3xl">

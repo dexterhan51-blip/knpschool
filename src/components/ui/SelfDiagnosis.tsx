@@ -45,6 +45,7 @@ export default function SelfDiagnosis() {
     return (
       <section
         id={NEW_SECTION_ID.selfDiagnosis}
+        aria-label="내 상황 자가진단"
         className="bg-navy px-6 py-20 md:py-28"
       >
         <div className="mx-auto max-w-2xl text-center">
