@@ -78,6 +78,14 @@ function stripHTML(html: string): string {
   return html.replace(/<[^>]*>/g, "").replace(/\n/g, " ").trim();
 }
 
+function decodeSlug(slug: string): string {
+  try {
+    return decodeURIComponent(slug);
+  } catch {
+    return slug;
+  }
+}
+
 function formatKoreanDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString("ko-KR", {
@@ -121,7 +129,7 @@ function transformPost(
 
   return {
     id: wp.id,
-    slug: wp.slug,
+    slug: decodeSlug(wp.slug),
     title: wp.title.rendered,
     excerpt: stripHTML(wp.excerpt.rendered),
     content: wp.content.rendered,
@@ -164,9 +172,10 @@ export async function getPosts(page = 1): Promise<PaginatedPosts> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  // WP API accepts both encoded and decoded slugs
   const [{ data: wpPosts }, categories, tags] = await Promise.all([
     wpFetch<WPPost[]>("/wp/v2/posts", {
-      slug,
+      slug: encodeURIComponent(slug),
       _embed: "",
     }),
     getAllCategories(),
@@ -188,7 +197,7 @@ export async function getAllPostSlugs(): Promise<string[]> {
       per_page: 100,
       _fields: "slug",
     });
-    slugs.push(...data.map((p) => p.slug));
+    slugs.push(...data.map((p) => decodeSlug(p.slug)));
     hasMore = page < totalPages;
     page++;
   }
