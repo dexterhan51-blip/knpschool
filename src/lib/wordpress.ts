@@ -8,9 +8,16 @@ import type {
   PaginatedPosts,
 } from "@/lib/types/wordpress";
 
-const API_URL = process.env.WORDPRESS_API_URL!;
 const REVALIDATE = Number(process.env.WORDPRESS_REVALIDATE_SECONDS) || 3600;
 const POSTS_PER_PAGE = 12;
+
+function getApiUrl(): string {
+  const url = process.env.WORDPRESS_API_URL;
+  if (!url) {
+    throw new Error("WORDPRESS_API_URL environment variable is not set");
+  }
+  return url;
+}
 
 // ─── Low-level fetch helper ───────────────────────────────────
 
@@ -18,7 +25,7 @@ async function wpFetch<T>(
   endpoint: string,
   params?: Record<string, string | number>,
 ): Promise<{ data: T; totalPages: number; totalPosts: number }> {
-  const url = new URL(`${API_URL}${endpoint}`);
+  const url = new URL(`${getApiUrl()}${endpoint}`);
   if (params) {
     Object.entries(params).forEach(([key, val]) => {
       url.searchParams.set(key, String(val));
