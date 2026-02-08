@@ -172,10 +172,9 @@ export async function getPosts(page = 1): Promise<PaginatedPosts> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  // WP API accepts both encoded and decoded slugs
   const [{ data: wpPosts }, categories, tags] = await Promise.all([
     wpFetch<WPPost[]>("/wp/v2/posts", {
-      slug: encodeURIComponent(slug),
+      slug,
       _embed: "",
     }),
     getAllCategories(),
