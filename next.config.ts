@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: "img.youtube.com",
         pathname: "/vi/**",
       },
+      {
+        protocol: "https",
+        hostname: "wordpress-1568541-6197899.cloudwaysapps.com",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
   },
 
